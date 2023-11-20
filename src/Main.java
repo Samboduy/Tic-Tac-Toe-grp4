@@ -5,6 +5,8 @@ public class Main {
 
         System.out.println("Hej sambodaj och viktor");
 
+//Controll T är pull kortkommando
+
 
         System.out.println("Hej");
         System.out.println("då");
