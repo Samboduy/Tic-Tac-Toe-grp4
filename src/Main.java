@@ -8,6 +8,7 @@ public class Main {
 
         System.out.println("Hej");
         System.out.println("då");
+        System.out.println("SER NI MIG");
 
     }
 }
