@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class PlayingField extends JPanel {
     // GridLayout
     ArrayList<Square> squares = new ArrayList<Square>();
-    char nuvarandeSpelare= 'X';
+    static char nuvarandeSpelare= 'X';
     //Here we want to make a grid layout, and which from an array list of 9 instances of Square, adds all to a grid layout.
 
-    PlayingField(Window window) {
+    PlayingField() {
         this.setLayout(new GridLayout(3, 3));
         //Add the initial 9 squares
         for (int i = 0; i < 9; i++) {
-            squares.add(new Square());
+            squares.add(new Square(this));
         }
         //Using the existing list of square instances, add square.
         for (int i = 0; i < squares.size(); i++) {
@@ -36,5 +36,8 @@ public class PlayingField extends JPanel {
         for (Square square : squares) {
             square.rensa();
         }
+    }
+    public char getNuvarandeSpelare() {
+        return nuvarandeSpelare;
     }
 }
