@@ -32,7 +32,7 @@ public class Window extends JFrame {
         JLabel status = new JLabel("status");
         topPanelStatus.add(status);
 
-        playingField = new PlayingField(this);
+        playingField = new PlayingField();
         add(playingField, BorderLayout.CENTER);
 
         // Create a bottomPanel to place the "restart" button
