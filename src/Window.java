@@ -40,10 +40,9 @@ public class Window extends JFrame {
         //adds an action listener to the restart button that calls on the restartPressed method
         restart.addActionListener(e -> restartPressed());
         bottomPanel.add(restart);
+
+        add(new PlayingField(), BorderLayout.CENTER);
         setVisible(true);
-
-
-        add(new PlayingField(this), BorderLayout.CENTER);
 
     }
     // Made a method that sends a message when you press the restart button
