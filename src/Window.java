@@ -5,9 +5,6 @@ import java.awt.event.ActionListener;
 
 
 public class Window extends JFrame {
-    //BorderLayout
-    //En JPanel
-    //Sätta text i NORTH med JLabel
     JButton restart;
     PlayingField playingField;
     Window () {
@@ -43,8 +40,6 @@ public class Window extends JFrame {
         //adds an action listener to the restart button that calls on the restartPressed method
         restart.addActionListener(e -> restartPressed());
         bottomPanel.add(restart);
-
-
 
         setVisible(true);
 

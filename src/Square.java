@@ -29,9 +29,6 @@ public class Square extends JButton {
         setText(Character.toString(marker));
     }
 
-    private char nuvarandeSpelareMarker(){
-        return 'X';
-    }
 }
 
 

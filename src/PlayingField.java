@@ -3,8 +3,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class PlayingField extends JPanel {
-    // GridLayout
     ArrayList<Square> squares = new ArrayList<Square>();
+
+    //Just nu är det så att den första spelaren alltid är 'X'
     static char nuvarandeSpelare= 'X';
     //Here we want to make a grid layout, and which from an array list of 9 instances of Square, adds all to a grid layout.
 
@@ -24,6 +25,8 @@ public class PlayingField extends JPanel {
         //window.setVisible(true);
 
     }
+
+    //En if-sats för att avgöra vem ska sin lägga sin marker, kallas på när man trycker på knappen
     public void bytaSpelare(){
         if (nuvarandeSpelare == 'X'){
             nuvarandeSpelare = 'O';
