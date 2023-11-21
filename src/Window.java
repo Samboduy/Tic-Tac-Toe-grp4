@@ -8,7 +8,7 @@ public class Window extends JFrame {
     //BorderLayout
     //En JPanel
     //Sätta text i NORTH med JLabel
-
+    JButton restart;
     Window () {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +36,7 @@ public class Window extends JFrame {
         JPanel bottomPanel = new JPanel();
         add(bottomPanel, BorderLayout.SOUTH);
 
-        JButton restart = new JButton("Starta om");
+        restart = new JButton("Starta om");
         //adds an action listener to the restart button that calls on the restartPressed method
         restart.addActionListener(e -> restartPressed());
         bottomPanel.add(restart);
@@ -46,8 +46,11 @@ public class Window extends JFrame {
         add(new PlayingField(), BorderLayout.CENTER);
 
     }
-// Made a method that sends a message when you press the restart button
+    // Made a method that sends a message when you press the restart button
+    //Testar att man kan göra så att en knapp inte är klickbar
+
     public void restartPressed(){
         System.out.println("Nu börjar vi om");
+        restart.setEnabled(false);
     }
 }
