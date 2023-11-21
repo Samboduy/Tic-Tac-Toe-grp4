@@ -4,49 +4,50 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class Window extends JFrame  implements ActionListener {
+public class Window extends JFrame {
     //BorderLayout
     //En JPanel
     //Sätta text i NORTH med JLabel
 
-Window () {
-    setLayout(new BorderLayout());
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setExtendedState(JFrame.MAXIMIZED_BOTH);
+    Window () {
+        setLayout(new BorderLayout());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-    // Create a panel at the top to place the titel and "status"
-    JPanel topPanel = new JPanel();
-    topPanel.setLayout(new BorderLayout());
-    add(topPanel, BorderLayout.NORTH);
+        // Create a panel at the top to place the titel and "status"
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BorderLayout());
+        add(topPanel, BorderLayout.NORTH);
 
-    JPanel topPanelTitle = new JPanel();
-    topPanel.add(topPanelTitle, BorderLayout.NORTH);
+        JPanel topPanelTitle = new JPanel();
+        topPanel.add(topPanelTitle, BorderLayout.NORTH);
 
-    JLabel title = new JLabel("Tic Tac Toe!");
-    topPanelTitle.add(title);
+        JLabel title = new JLabel("Tic Tac Toe!");
+        topPanelTitle.add(title);
 
-    JPanel topPanelStatus = new JPanel();
-    topPanel.add(topPanelStatus, BorderLayout.SOUTH);
+        JPanel topPanelStatus = new JPanel();
+        topPanel.add(topPanelStatus, BorderLayout.SOUTH);
 
-    JLabel status = new JLabel("status");
-    topPanelStatus.add(status);
-
-
-    // Create a bottomPanel to place the "restart" button
-    JPanel bottomPanel = new JPanel();
-    add(bottomPanel, BorderLayout.SOUTH);
-
-    JButton restart = new JButton("Starta om");
-    bottomPanel.add(restart);
-    setVisible(true);
+        JLabel status = new JLabel("status");
+        topPanelStatus.add(status);
 
 
-    add(new PlayingField(), BorderLayout.CENTER);
+        // Create a bottomPanel to place the "restart" button
+        JPanel bottomPanel = new JPanel();
+        add(bottomPanel, BorderLayout.SOUTH);
 
-}
-// Action listener till
-    @Override
-    public void actionPerformed(ActionEvent e) {
+        JButton restart = new JButton("Starta om");
+        //adds an action listener to the restart button that calls on the restartPressed method
+        restart.addActionListener(e -> restartPressed());
+        bottomPanel.add(restart);
+        setVisible(true);
 
+
+        add(new PlayingField(), BorderLayout.CENTER);
+
+    }
+// Made a method that sends a message when you press the restart button
+    public void restartPressed(){
+        System.out.println("Nu börjar vi om");
     }
 }
