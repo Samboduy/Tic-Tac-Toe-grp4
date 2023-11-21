@@ -8,6 +8,7 @@ public class Window extends JFrame {
     //BorderLayout
     //En JPanel
     //Sätta text i NORTH med JLabel
+    private PlayingField playingField;
     JButton restart;
     Window () {
         setLayout(new BorderLayout());
@@ -31,16 +32,26 @@ public class Window extends JFrame {
         JLabel status = new JLabel("status");
         topPanelStatus.add(status);
 
-        add(new PlayingField(this), BorderLayout.CENTER);
+        add(new PlayingField(), BorderLayout.CENTER);
 
         // Create a bottomPanel to place the "restart" button
         JPanel bottomPanel = new JPanel();
         add(bottomPanel, BorderLayout.SOUTH);
 
+        playingField = new PlayingField();
+        add(playingField, BorderLayout.CENTER);
+
         restart = new JButton("Starta om");
         //adds an action listener to the restart button that calls on the restartPressed method
         restart.addActionListener(e -> restartPressed());
         bottomPanel.add(restart);
+
+        restart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playingField.bytaSpelare(); // Anropa bytSpelare-metoden från PlayingField
+            }
+        });
 
         setVisible(true);
 
