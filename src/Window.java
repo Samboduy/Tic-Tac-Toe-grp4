@@ -12,6 +12,7 @@ Window () {
     setSize(1000, 750);
 
     JPanel topPanel = new JPanel();
+    topPanel.setLayout(new BorderLayout());
     add(topPanel, BorderLayout.NORTH);
 
     JPanel topPanelTitle = new JPanel();
@@ -21,7 +22,7 @@ Window () {
     topPanelTitle.add(title);
 
     JPanel topPanelStatus = new JPanel();
-    add(topPanelStatus, BorderLayout.SOUTH);
+    topPanel.add(topPanelStatus, BorderLayout.SOUTH);
 
     JLabel status = new JLabel("status");
     topPanelStatus.add(status);
