@@ -29,6 +29,9 @@ Window () {
 
     setVisible(true);
 
+
+    add(new PlayingField(), BorderLayout.CENTER);
+
 }
 
 }

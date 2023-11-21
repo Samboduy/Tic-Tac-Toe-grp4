@@ -10,10 +10,16 @@ public class PlayingField extends JPanel {
 
     PlayingField() {
         this.setLayout(new GridLayout(3, 3));
-
+        //Add the initial 9 squares
+        for (int i = 0; i < 9; i++) {
+            squares.add(new Square());
+        }
+        //Using the existing list of square instances, add square.
         for (int i = 0; i < squares.size(); i++) {
             Square square = squares.get(i);
+            //add(square);
             System.out.println(i);
+            System.out.println(square);
         }
 
     }
