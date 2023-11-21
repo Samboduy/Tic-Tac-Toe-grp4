@@ -11,6 +11,7 @@ Window () {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(1000, 750);
 
+    // Create a panel at the top to place the titel and "status"
     JPanel topPanel = new JPanel();
     topPanel.setLayout(new BorderLayout());
     add(topPanel, BorderLayout.NORTH);
@@ -27,6 +28,13 @@ Window () {
     JLabel status = new JLabel("status");
     topPanelStatus.add(status);
 
+
+    // Create a bottomPanel to place the "restart" button
+    JPanel bottomPanel = new JPanel();
+    add(bottomPanel, BorderLayout.SOUTH);
+
+    JButton restart = new JButton("Starta om");
+    bottomPanel.add(restart);
     setVisible(true);
 
 }
