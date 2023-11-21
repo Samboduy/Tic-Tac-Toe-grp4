@@ -20,6 +20,14 @@ public class Square extends JButton {
         });
     }
 
+    public void rensa () {
+        marker = ' ';
+        upptagen = false;
+        setText(Character.toString(marker));
+    }
+
+
+
     private char nuvarandeSpelareMarker(){
         return 'X';
     }

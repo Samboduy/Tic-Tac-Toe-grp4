@@ -9,6 +9,7 @@ public class Window extends JFrame {
     //En JPanel
     //Sätta text i NORTH med JLabel
     JButton restart;
+    PlayingField playingField;
     Window () {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +32,8 @@ public class Window extends JFrame {
         JLabel status = new JLabel("status");
         topPanelStatus.add(status);
 
-        add(new PlayingField(this), BorderLayout.CENTER);
+        playingField = new PlayingField(this);
+        add(playingField, BorderLayout.CENTER);
 
         // Create a bottomPanel to place the "restart" button
         JPanel bottomPanel = new JPanel();
@@ -49,6 +51,6 @@ public class Window extends JFrame {
     //Testar att man kan göra så att en knapp inte är klickbar
 
     public void restartPressed(){
-
+        playingField.reset();
     }
 }

@@ -31,4 +31,10 @@ public class PlayingField extends JPanel {
             nuvarandeSpelare = 'X';
         }
     }
+
+    public void reset() {
+        for (Square square : squares) {
+            square.rensa();
+        }
+    }
 }
