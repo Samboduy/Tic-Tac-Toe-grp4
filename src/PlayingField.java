@@ -8,7 +8,7 @@ public class PlayingField extends JPanel {
 
     //Here we want to make a grid layout, and which from an array list of 9 instances of Square, adds all to a grid layout.
 
-    PlayingField() {
+    PlayingField(Window window) {
         this.setLayout(new GridLayout(3, 3));
         //Add the initial 9 squares
         for (int i = 0; i < 9; i++) {
@@ -20,8 +20,8 @@ public class PlayingField extends JPanel {
 
             this.add(square);
             System.out.println(i);
-            System.out.println(square);
         }
+        //window.setVisible(true);
 
     }
 }

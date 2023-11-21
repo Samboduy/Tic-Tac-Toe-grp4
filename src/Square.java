@@ -10,14 +10,12 @@ public class Square extends JButton {
         upptagen = false;
         marker = ' ';
         setFont(new Font("Arial", Font.PLAIN, 50));
-        addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!upptagen){
-                    marker = nuvarandeSpelareMarker();
-                    setText(Character.toString(marker));
-                    upptagen = true;
-                }
+        addActionListener(e ->
+        {
+            if (!upptagen){
+                marker = nuvarandeSpelareMarker();
+                setText(Character.toString(marker));
+                upptagen = true;
             }
         });
     }
