@@ -9,7 +9,7 @@ public class Square extends JButton {
     Square() {
         upptagen = false;
         marker = ' ';
-        setFont(new Font("Arial", Font.PLAIN, 50));
+        setFont(new Font("Arial", Font.PLAIN, 40));
         addActionListener(e ->
         {
             if (!upptagen){

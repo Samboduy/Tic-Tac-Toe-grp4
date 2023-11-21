@@ -31,6 +31,7 @@ public class Window extends JFrame {
         JLabel status = new JLabel("status");
         topPanelStatus.add(status);
 
+        add(new PlayingField(this), BorderLayout.CENTER);
 
         // Create a bottomPanel to place the "restart" button
         JPanel bottomPanel = new JPanel();
@@ -41,7 +42,6 @@ public class Window extends JFrame {
         restart.addActionListener(e -> restartPressed());
         bottomPanel.add(restart);
 
-        add(new PlayingField(this), BorderLayout.CENTER);
         setVisible(true);
 
     }
