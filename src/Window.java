@@ -9,7 +9,7 @@ public class Window extends JFrame {
 Window () {
     setLayout(new BorderLayout());
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(1000, 750);
+    setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     // Create a panel at the top to place the titel and "status"
     JPanel topPanel = new JPanel();
