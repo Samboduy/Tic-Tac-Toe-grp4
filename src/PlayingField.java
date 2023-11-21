@@ -17,7 +17,8 @@ public class PlayingField extends JPanel {
         //Using the existing list of square instances, add square.
         for (int i = 0; i < squares.size(); i++) {
             Square square = squares.get(i);
-            //add(square);
+
+            this.add(square);
             System.out.println(i);
             System.out.println(square);
         }
