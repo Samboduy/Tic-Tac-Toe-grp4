@@ -41,7 +41,7 @@ public class Window extends JFrame {
         restart.addActionListener(e -> restartPressed());
         bottomPanel.add(restart);
 
-        add(new PlayingField(), BorderLayout.CENTER);
+        add(new PlayingField(this), BorderLayout.CENTER);
         setVisible(true);
 
     }
