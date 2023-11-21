@@ -49,7 +49,6 @@ public class Window extends JFrame {
     //Testar att man kan göra så att en knapp inte är klickbar
 
     public void restartPressed(){
-        System.out.println("Nu börjar vi om");
-        restart.setEnabled(false);
+
     }
 }

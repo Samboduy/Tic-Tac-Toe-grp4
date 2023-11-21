@@ -20,7 +20,6 @@ char nuvarandeSpelare= 'X';
 
             this.add(square);
             System.out.println(i);
-            System.out.println(square);
         }
         //window.setVisible(true);
 
