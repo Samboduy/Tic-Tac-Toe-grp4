@@ -39,9 +39,6 @@ public class Window extends JFrame {
         JPanel bottomPanel = new JPanel();
         add(bottomPanel, BorderLayout.SOUTH);
 
-        playingField = new PlayingField();
-        add(playingField, BorderLayout.CENTER);
-
         restart = new JButton("Starta om");
         //adds an action listener to the restart button that calls on the restartPressed method
         restart.addActionListener(e -> restartPressed());
