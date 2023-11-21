@@ -47,12 +47,7 @@ public class Window extends JFrame {
         restart.addActionListener(e -> restartPressed());
         bottomPanel.add(restart);
 
-        restart.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playingField.bytaSpelare(); // Anropa bytSpelare-metoden från PlayingField
-            }
-        });
+
 
         setVisible(true);
 
