@@ -11,6 +11,7 @@ Window () {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(1000, 750);
     setVisible(true);
+
 }
 
 }
