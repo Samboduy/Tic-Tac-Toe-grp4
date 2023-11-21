@@ -41,7 +41,7 @@ public class Window extends JFrame {
         restart.addActionListener(e -> restartPressed());
         bottomPanel.add(restart);
 
-        add(new PlayingField(status), BorderLayout.CENTER);
+        add(new PlayingField(this), BorderLayout.CENTER);
         setVisible(true);
 
     }
@@ -49,9 +49,6 @@ public class Window extends JFrame {
     //Testar att man kan göra så att en knapp inte är klickbar
 
     public void restartPressed(){
-
-    }
-    public void sam(){
 
     }
 }
