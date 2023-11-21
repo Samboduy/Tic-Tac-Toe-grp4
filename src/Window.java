@@ -27,6 +27,7 @@ Window () {
     topPanelStatus.add(status);
 
     setVisible(true);
+
 }
 
 }
