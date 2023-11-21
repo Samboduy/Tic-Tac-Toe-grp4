@@ -20,7 +20,6 @@ public class PlayingField extends JPanel {
 
             this.add(square);
             System.out.println(i);
-            System.out.println(square);
         }
         //window.setVisible(true);
 
