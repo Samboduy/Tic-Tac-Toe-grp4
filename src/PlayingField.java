@@ -32,6 +32,9 @@ public class PlayingField extends JPanel {
         }
     }
 
+    //Kallas från window när reset klickas.
+    //Gör en loop över en arrayen med squares, och
+    //kallas på rensa funktionen som finns i klassen Square
     public void reset() {
         for (Square square : squares) {
             square.rensa();

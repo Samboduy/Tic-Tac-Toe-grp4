@@ -22,7 +22,7 @@ public class Square extends JButton {
             }
         });}
 
-
+    //Anropas från PlayingField. Rensar variabler och texten i square.
     public void rensa () {
         marker = ' ';
         upptagen = false;
