@@ -8,7 +8,6 @@ public class Window extends JFrame {
     //BorderLayout
     //En JPanel
     //Sätta text i NORTH med JLabel
-    private PlayingField playingField;
     JButton restart;
     PlayingField playingField;
     Window () {
