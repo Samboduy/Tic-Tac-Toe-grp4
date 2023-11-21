@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Window extends JFrame {
+
+public class Window extends JFrame  implements ActionListener {
     //BorderLayout
     //En JPanel
     //Sätta text i NORTH med JLabel
@@ -41,5 +44,9 @@ Window () {
     add(new PlayingField(), BorderLayout.CENTER);
 
 }
+// Action listener till
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
+    }
 }
