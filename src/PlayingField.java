@@ -13,6 +13,7 @@ public class PlayingField extends JPanel {
         //Add the initial 9 squares
         for (int i = 0; i < 9; i++) {
             squares.add(new Square());
+            setVisible(true);
         }
         //Using the existing list of square instances, add square.
         for (int i = 0; i < squares.size(); i++) {
