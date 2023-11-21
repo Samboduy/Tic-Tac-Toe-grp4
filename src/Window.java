@@ -43,7 +43,7 @@ public class Window extends JFrame {
         setVisible(true);
 
 
-        add(new PlayingField(), BorderLayout.CENTER);
+        add(new PlayingField(this), BorderLayout.CENTER);
 
     }
     // Made a method that sends a message when you press the restart button
