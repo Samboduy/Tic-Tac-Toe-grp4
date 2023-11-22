@@ -9,11 +9,11 @@ public class PlayingField extends JPanel {
     static char nuvarandeSpelare= 'X';
     //Here we want to make a grid layout, and which from an array list of 9 instances of Square, adds all to a grid layout.
 
-    PlayingField() {
+    PlayingField(JLabel stateText) {
         this.setLayout(new GridLayout(3, 3));
         //Add the initial 9 squares
         for (int i = 0; i < 9; i++) {
-            squares.add(new Square(this));
+            squares.add(new Square(this,stateText));
         }
         //Using the existing list of square instances, add square.
         for (int i = 0; i < squares.size(); i++) {

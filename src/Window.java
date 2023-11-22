@@ -28,8 +28,8 @@ public class Window extends JFrame {
 
         JLabel status = new JLabel("status");
         topPanelStatus.add(status);
-
-        playingField = new PlayingField();
+        //creates a new playingfield and state text to PlayingField
+        playingField = new PlayingField(status);
         add(playingField, BorderLayout.CENTER);
 
         // Create a bottomPanel to place the "restart" button

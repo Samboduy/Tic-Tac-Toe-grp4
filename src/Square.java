@@ -7,8 +7,19 @@ public class Square extends JButton {
     private char marker;
     private boolean upptagen;
     private PlayingField playingField;
-    Square(PlayingField playingField) {
+    private String stateText;
+    public void setStateText(String newStateText){
+        this.stateText=newStateText;
+    }
+    public String getStateText(){
+        return stateText;
+    }
+
+
+    Square(PlayingField playingField, JLabel stateText) {
         this.playingField = playingField;
+        setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
+        stateText.setText("Player " + getStateText() + " turn");
         upptagen = false;
         marker = ' ';
         setFont(new Font("Arial", Font.PLAIN, 40));
@@ -19,6 +30,8 @@ public class Square extends JButton {
                 setText(Character.toString(marker));
                 upptagen = true;
                 playingField.bytaSpelare();
+                setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
+                stateText.setText("Player " + getStateText() + " turn");
             }
         });}
 
