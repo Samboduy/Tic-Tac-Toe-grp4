@@ -6,8 +6,12 @@ import java.awt.event.ActionListener;
 
 public class Window extends JFrame {
     JButton restart;
+
+    JButton restartVsAI;
     PlayingField playingField;
     JLabel status;
+
+    boolean againstAI = false;
 
     Window () {
         setLayout(new BorderLayout());
@@ -31,7 +35,7 @@ public class Window extends JFrame {
         status = new JLabel();
         topPanelStatus.add(status);
         //creates a new playingfield and state text to PlayingField
-        playingField = new PlayingField(status);
+        playingField = new PlayingField(this, status );
         add(playingField, BorderLayout.CENTER);
 
         // Create a bottomPanel to place the "restart" button
@@ -43,6 +47,11 @@ public class Window extends JFrame {
         restart.addActionListener(e -> restartPressed());
         bottomPanel.add(restart);
 
+        restartVsAI = new JButton("Starta om (mot AI)");
+        //adds an action listener to the restart button that calls on the restartPressed method
+        restartVsAI.addActionListener(e -> restartWithAIPressed());
+        bottomPanel.add(restartVsAI);
+
         setVisible(true);
 
     }
@@ -50,6 +59,11 @@ public class Window extends JFrame {
     //Testar att man kan göra så att en knapp inte är klickbar
 
     public void restartPressed(){
+        againstAI = false;
+        playingField.reset(status);
+    }
+    public void restartWithAIPressed(){
+        againstAI = true;
         playingField.reset(status);
     }
 }

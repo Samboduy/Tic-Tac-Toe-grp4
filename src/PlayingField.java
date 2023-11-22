@@ -1,10 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class PlayingField extends JPanel {
     ArrayList<Square> squares = new ArrayList<Square>();
+
+    Window window;
 
     //Just nu är det så att den första spelaren alltid är 'X'
     static char nuvarandeSpelare;
@@ -24,7 +30,8 @@ public class PlayingField extends JPanel {
         Random rand = new Random();
         number=rand.nextInt(between) + 1;
     }
-    PlayingField(JLabel stateText) {
+    PlayingField(Window window, JLabel stateText) {
+        this.window = window;
         this.setLayout(new GridLayout(3, 3));
         //Add the initial 9 squares
         for (int i = 0; i < 9; i++) {
@@ -113,8 +120,22 @@ public class PlayingField extends JPanel {
         } else {
             nuvarandeSpelare = 'X';
         }
+
+        if (window.againstAI) {
+            //Make an AI move
+            AIMove();
+        }
     }
 
+    public void AIMove() {
+        if (nuvarandeSpelare != 'O') return; //For now, hard code so it only triggers with O, later it will compare with the random player char
+        List<Square> emptySquares = (List<Square>) squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
+        Collections.shuffle(emptySquares); //Shuffle array
+
+        Square randomSquare = emptySquares.get(0);
+        randomSquare.doClick();
+
+    }
     //Kallas från window när reset klickas.
     //Gör en loop över en arrayen med squares, och
     //kallas på rensa funktionen som finns i klassen Square
