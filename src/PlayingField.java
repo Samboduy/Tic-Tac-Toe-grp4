@@ -1,17 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class PlayingField extends JPanel {
     ArrayList<Square> squares = new ArrayList<Square>();
 
     //Just nu är det så att den första spelaren alltid är 'X'
-    static char nuvarandeSpelare= 'X';
+    static char nuvarandeSpelare;
     //Here we want to make a grid layout, and which from an array list of 9 instances of Square, adds all to a grid layout.
-    JLabel stateText;
+    private int number;
+    public int getNumber(){
+        return number;
+    }
+    public void setNumber(int between){
+        Random rand = new Random();
+        number=rand.nextInt(between) + 1;
+    }
     PlayingField(JLabel stateText) {
-        this.stateText = stateText;
-        stateText.setText("Player " + nuvarandeSpelare + "'s turn"); //Initial text
         this.setLayout(new GridLayout(3, 3));
         //Add the initial 9 squares
         for (int i = 0; i < 9; i++) {
@@ -25,7 +31,7 @@ public class PlayingField extends JPanel {
             System.out.println(i);
         }
         //window.setVisible(true);
-
+        randomPlayer();
     }
 
     public boolean checkWinner (){
@@ -34,19 +40,9 @@ public class PlayingField extends JPanel {
 
         for (int i = 0; i < 3; i++){
             for (int x = 0; x < 3; x++){
-                System.out.println(index);
-                board[i][x] = squares.get(index).getMarker();
-                index++;
+                board[i][x] = squares.get(index++).getMarker();
             }
         }
-
-        for (char[] chars : board) {
-            for (char character : chars) {
-                System.out.println(Character.toString(character));
-            }
-        }
-
-
 
         for (int i = 0; i < 3; i++) {
 
@@ -84,11 +80,17 @@ public class PlayingField extends JPanel {
         for (Square square : squares) {
             square.rensa();
         }
-
-        //Randomize player here
-
-        //Reset status
-        stateText.setText("Player " + nuvarandeSpelare + "'s turn");
+        randomPlayer();
+    }
+    public void randomPlayer(){
+        //takes a number that will be randomized between, the player to begin is then decided if it's one or two
+        setNumber(2);
+        if (getNumber()==1){
+            nuvarandeSpelare='X';
+        }
+        else{
+            nuvarandeSpelare='O';
+        }
     }
     public char getNuvarandeSpelare() {
         return nuvarandeSpelare;
