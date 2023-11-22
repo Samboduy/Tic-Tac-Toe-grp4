@@ -26,20 +26,21 @@ public class Square extends JButton {
         addActionListener(e ->
         {
             if (!upptagen){
-                setText(Character.toString(marker));
+                marker = playingField.getNuvarandeSpelare();
+
                 upptagen = true;
+                setForeground(new Color(0,0,0,100)); //Override hover
+                setStateText(String.valueOf(marker));
+                setText(Character.toString(marker));
                 playingField.bytaSpelare();
 
-                marker = playingField.getNuvarandeSpelare();
-                setForeground(new Color(0,0,0,100)); //Override hover
-                setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
                 stateText.setText("Player " + getStateText() + " turn");
             }
         });
         addMouseListener(new MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 //setBackground(Color.GREEN);
-
+                marker = playingField.getNuvarandeSpelare();
                 if (!upptagen) {
                     setText(Character.toString(marker));
                     setForeground(new Color(0,0,0,20));
