@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 public class Window extends JFrame {
     JButton restart;
     PlayingField playingField;
+    JLabel status;
+
     Window () {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,7 +28,7 @@ public class Window extends JFrame {
         JPanel topPanelStatus = new JPanel();
         topPanel.add(topPanelStatus, BorderLayout.SOUTH);
 
-        JLabel status = new JLabel("status");
+        status = new JLabel();
         topPanelStatus.add(status);
         //creates a new playingfield and state text to PlayingField
         playingField = new PlayingField(status);
@@ -48,6 +50,6 @@ public class Window extends JFrame {
     //Testar att man kan göra så att en knapp inte är klickbar
 
     public void restartPressed(){
-        playingField.reset();
+        playingField.reset(status);
     }
 }

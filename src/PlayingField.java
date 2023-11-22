@@ -9,6 +9,13 @@ public class PlayingField extends JPanel {
     //Just nu är det så att den första spelaren alltid är 'X'
     static char nuvarandeSpelare;
     //Here we want to make a grid layout, and which from an array list of 9 instances of Square, adds all to a grid layout.
+    private String stateText;
+    public void setStateText(String newStateText){
+        this.stateText=newStateText;
+    }
+    public String getStateText(){
+        return stateText;
+    }
     private int number;
     public int getNumber(){
         return number;
@@ -32,6 +39,8 @@ public class PlayingField extends JPanel {
         }
         //window.setVisible(true);
         randomPlayer();
+        setStateText(String.valueOf(nuvarandeSpelare));
+        stateText.setText("Player " + getStateText() + "'s turn");
     }
 
     public boolean checkWinner() {
@@ -109,17 +118,20 @@ public class PlayingField extends JPanel {
     //Kallas från window när reset klickas.
     //Gör en loop över en arrayen med squares, och
     //kallas på rensa funktionen som finns i klassen Square
-    public void reset() {
+    public void reset(JLabel status) {
         for (Square square : squares) {
             square.rensa();
         }
         randomPlayer();
+        setStateText(String.valueOf(nuvarandeSpelare));
+        status.setText("Player " + getStateText() + "'s turn");
     }
     public void randomPlayer(){
         //takes a number that will be randomized between, the player to begin is then decided if it's one or two
         setNumber(2);
         if (getNumber()==1){
             nuvarandeSpelare='X';
+
         }
         else{
             nuvarandeSpelare='O';
