@@ -52,9 +52,9 @@ public class PlayingField extends JPanel {
         };
 
         for (int[] combination : winningCombinations) {
-            int first = combination[0];
-            int second = combination[1];
-            int third = combination[2];
+            int first = combination[0]; //0,3,6 (horinsontellt), 0,1,2 (vertikalt), 0,2 (diagonalt)
+            int second = combination[1]; //1,4,7 (horinsontellt), 0,4,5 (vertikalt), 4,4 (diagonalt)
+            int third = combination[2]; //2,5,8 (horinsontellt), 6,7,8 (vertikalt), 8,6 (diagonalt)
 
             Square square1 = squares.get(first);
             Square square2 = squares.get(second);
