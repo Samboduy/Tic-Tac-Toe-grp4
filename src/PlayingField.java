@@ -26,6 +26,36 @@ public class PlayingField extends JPanel {
 
     }
 
+    public boolean checkWinner (){
+        char [][] board = new char[3][3];
+        int index = 0;
+
+        for (int i = 0; i < 3; i++){
+            for (int x = 0; x < 3; x++){
+                board[i][x] = squares.get(index++).getMarker();
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+
+            //Vinnare i rad i
+            if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ') {
+                return true;
+            }
+            //Vinnare i kolumn i
+            if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != ' ') {
+                return true;
+            }
+        }
+        //Kontrollera diagonaler för en vinnare
+        if ((board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != ' ')
+                || (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != ' ')) {
+            return true; // Vinnare i diagonal
+        }
+
+        return false; // Inga vinnare hittades
+    }
+
     //En if-sats för att avgöra vem ska sin lägga sin marker, kallas på när man trycker på knappen
     public void bytaSpelare(){
         if (nuvarandeSpelare == 'X'){

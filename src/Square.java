@@ -59,6 +59,10 @@ public class Square extends JButton {
     }
 
 
+    public char getMarker() {
+        return marker;
+    }
+
     //Anropas från PlayingField. Rensar variabler och texten i square.
     public void rensa () {
         marker = ' ';
