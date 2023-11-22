@@ -87,8 +87,16 @@ public class PlayingField extends JPanel {
                     squares.get(count).setEnabled(false);
                     squares.get(count).setUpptagen(true);
                     setCount(count+1);
-
                 }
+                if (nuvarandeSpelare=='O'){
+                    JOptionPane.showMessageDialog(null,"Player O won the game",
+                            "Victory",JOptionPane.PLAIN_MESSAGE);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"Player X won the game",
+                            "Victory",JOptionPane.PLAIN_MESSAGE);
+                }
+
                 return true;
             }
 
