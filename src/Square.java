@@ -21,7 +21,6 @@ public class Square extends JButton {
         setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
 
         upptagen = false;
-        marker = playingField.getNuvarandeSpelare();
         setFont(new Font("Arial", Font.PLAIN, 40));
         addActionListener(e ->
         {
@@ -43,7 +42,7 @@ public class Square extends JButton {
         addMouseListener(new MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 //setBackground(Color.GREEN);
-                marker = playingField.getNuvarandeSpelare();
+                char marker = playingField.getNuvarandeSpelare();
                 if (!upptagen) {
                     setText(Character.toString(marker));
                     setForeground(new Color(0,0,0,20));

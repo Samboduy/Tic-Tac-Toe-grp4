@@ -34,9 +34,19 @@ public class PlayingField extends JPanel {
 
         for (int i = 0; i < 3; i++){
             for (int x = 0; x < 3; x++){
-                board[i][x] = squares.get(index++).getMarker();
+                System.out.println(index);
+                board[i][x] = squares.get(index).getMarker();
+                index++;
             }
         }
+
+        for (char[] chars : board) {
+            for (char character : chars) {
+                System.out.println(Character.toString(character));
+            }
+        }
+
+
 
         for (int i = 0; i < 3; i++) {
 
