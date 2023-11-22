@@ -87,7 +87,6 @@ public class PlayingField extends JPanel {
                     squares.get(count).setEnabled(false);
                     squares.get(count).setUpptagen(true);
                     setCount(count+1);
-                    System.out.println("count " + count);
 
                 }
                 return true;
