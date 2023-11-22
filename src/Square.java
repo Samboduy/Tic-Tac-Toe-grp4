@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 
 public class Square extends JButton {
-    private char marker;
+    private char marker = ' ';
     private boolean upptagen;
     private PlayingField playingField;
     private String stateText;
@@ -30,15 +30,17 @@ public class Square extends JButton {
                 upptagen = true;
                 setForeground(Color.BLACK); //Override hover
 
+                if (playingField.checkWinner()) {
+                    //Visa vinnarmeddelande
+                    System.out.println("Player " + marker + " wins!");
+                }
+
                 setText(Character.toString(marker));
                 playingField.bytaSpelare();
                 setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
                 stateText.setText("Player " + getStateText() + "'s turn");
                 //Checka efter vinnare efter varje drag
-                if (playingField.checkWinner()) {
-                    //Visa vinnarmeddelande
-                    System.out.println("Player " + marker + " wins!");
-                }
+
             }
         });
         addMouseListener(new MouseAdapter() {

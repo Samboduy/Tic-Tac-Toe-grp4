@@ -51,6 +51,10 @@ public class PlayingField extends JPanel {
                 {0, 4, 8}, {2, 4, 6} //Diagonala
         };
 
+        for (Square square : squares) {
+            System.out.println(square.getMarker());
+        }
+
         for (int[] combination : winningCombinations) {
             int first = combination[0];
             int second = combination[1];
