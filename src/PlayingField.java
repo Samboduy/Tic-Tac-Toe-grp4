@@ -34,7 +34,37 @@ public class PlayingField extends JPanel {
         randomPlayer();
     }
 
-    public boolean checkWinner (){
+    public boolean checkWinner() {
+        //Vinnande kombinationer - horisontella, vertikala och diagonala
+        int[][] winningCombinations = {
+                {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, //Horisontella
+                {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, //Vertikala
+                {0, 4, 8}, {2, 4, 6} //Diagonala
+        };
+
+        for (int[] combination : winningCombinations) {
+            int first = combination[0];
+            int second = combination[1];
+            int third = combination[2];
+
+            Square square1 = squares.get(first);
+            Square square2 = squares.get(second);
+            Square square3 = squares.get(third);
+
+            if (square1.getMarker() == square2.getMarker() &&
+                    square2.getMarker() == square3.getMarker() &&
+                    square1.getMarker() != ' ') {
+                //Tre markörer i rad hittade - vinnare
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+
+   /* public boolean checkWinner (){
         char [][] board = new char[3][3];
         int index = 0;
 
@@ -62,7 +92,10 @@ public class PlayingField extends JPanel {
         }
 
         return false; // Inga vinnare hittades
-    }
+    } */
+
+
+
 
     //En if-sats för att avgöra vem ska sin lägga sin marker, kallas på när man trycker på knappen
     public void bytaSpelare(){

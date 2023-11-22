@@ -34,8 +34,10 @@ public class Square extends JButton {
                 playingField.bytaSpelare();
                 setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
                 stateText.setText("Player " + getStateText() + "'s turn");
+                //Checka efter vinnare efter varje drag
                 if (playingField.checkWinner()) {
-                    System.out.println("Vi har en vinnare!");
+                    //Visa vinnarmeddelande
+                    System.out.println("Player " + marker + " wins!");
                 }
             }
         });
