@@ -29,12 +29,11 @@ public class Square extends JButton {
                 marker = playingField.getNuvarandeSpelare();
 
                 upptagen = true;
-                setForeground(new Color(0,0,0,100)); //Override hover
+                setForeground(Color.BLACK); //Override hover
 
                 setText(Character.toString(marker));
                 playingField.bytaSpelare();
                 setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
-
                 stateText.setText("Player " + getStateText() + " turn");
             }
         });
