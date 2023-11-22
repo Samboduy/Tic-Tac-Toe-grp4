@@ -30,9 +30,10 @@ public class Square extends JButton {
 
                 upptagen = true;
                 setForeground(new Color(0,0,0,100)); //Override hover
-                setStateText(String.valueOf(marker));
+
                 setText(Character.toString(marker));
                 playingField.bytaSpelare();
+                setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
 
                 stateText.setText("Player " + getStateText() + " turn");
             }
