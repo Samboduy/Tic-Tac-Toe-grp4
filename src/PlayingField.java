@@ -85,8 +85,10 @@ public class PlayingField extends JPanel {
                 //Tre markörer i rad hittade - vinnare
                 for (count = 0; count<9;){
                     squares.get(count).setEnabled(false);
+                    squares.get(count).setUpptagen(true);
                     setCount(count+1);
                     System.out.println("count " + count);
+
                 }
                 return true;
             }

@@ -6,6 +6,12 @@ import java.awt.event.MouseAdapter;
 public class Square extends JButton {
     private char marker = ' ';
     private boolean upptagen;
+    public void setUpptagen(boolean newUpptagen){
+        upptagen=newUpptagen;
+    }
+    public boolean getUpptagen(){
+        return upptagen;
+    }
     private PlayingField playingField;
     private String stateText;
     public void setStateText(String newStateText){
