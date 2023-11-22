@@ -19,7 +19,7 @@ public class Square extends JButton {
     Square(PlayingField playingField, JLabel stateText) {
         this.playingField = playingField;
         setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
-        stateText.setText("Player " + getStateText() + " turn");
+
         upptagen = false;
         marker = playingField.getNuvarandeSpelare();
         setFont(new Font("Arial", Font.PLAIN, 40));
@@ -34,7 +34,7 @@ public class Square extends JButton {
                 setText(Character.toString(marker));
                 playingField.bytaSpelare();
                 setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
-                stateText.setText("Player " + getStateText() + " turn");
+                stateText.setText("Player " + getStateText() + "'s turn");
             }
         });
         addMouseListener(new MouseAdapter() {
@@ -52,7 +52,7 @@ public class Square extends JButton {
                 //setBackground(UIManager.getColor("control"));
                 if (!upptagen) {
                     setText("");
-                    setForeground(new Color(0,0,0,100));
+                    setForeground(Color.BLACK);
                 }
             }
         });

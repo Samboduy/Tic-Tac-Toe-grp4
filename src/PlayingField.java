@@ -8,8 +8,10 @@ public class PlayingField extends JPanel {
     //Just nu är det så att den första spelaren alltid är 'X'
     static char nuvarandeSpelare= 'X';
     //Here we want to make a grid layout, and which from an array list of 9 instances of Square, adds all to a grid layout.
-
+    JLabel stateText;
     PlayingField(JLabel stateText) {
+        this.stateText = stateText;
+        stateText.setText("Player " + nuvarandeSpelare + "'s turn"); //Initial text
         this.setLayout(new GridLayout(3, 3));
         //Add the initial 9 squares
         for (int i = 0; i < 9; i++) {
@@ -72,6 +74,11 @@ public class PlayingField extends JPanel {
         for (Square square : squares) {
             square.rensa();
         }
+
+        //Randomize player here
+
+        //Reset status
+        stateText.setText("Player " + nuvarandeSpelare + "'s turn");
     }
     public char getNuvarandeSpelare() {
         return nuvarandeSpelare;
