@@ -24,6 +24,14 @@ public class PlayingField extends JPanel {
         Random rand = new Random();
         number=rand.nextInt(between) + 1;
     }
+    private int count = 0;
+    public void setCount(int newCount){
+        count=newCount;
+    }
+    public int getCount(){
+        return count;
+    }
+    Square square;
     PlayingField(JLabel stateText) {
         this.setLayout(new GridLayout(3, 3));
         //Add the initial 9 squares
@@ -44,6 +52,7 @@ public class PlayingField extends JPanel {
     }
 
     public boolean checkWinner() {
+
         //Vinnande kombinationer - horisontella, vertikala och diagonala
         int[][] winningCombinations = {
                 {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, //Horisontella
@@ -64,8 +73,14 @@ public class PlayingField extends JPanel {
                     square2.getMarker() == square3.getMarker() &&
                     square1.getMarker() != ' ') {
                 //Tre markörer i rad hittade - vinnare
+                for (count = 0; count<9;){
+                    squares.get(count).setEnabled(false);
+                    setCount(count+1);
+                    System.out.println("count " + count);
+                }
                 return true;
             }
+
         }
 
         return false;
@@ -140,4 +155,5 @@ public class PlayingField extends JPanel {
     public char getNuvarandeSpelare() {
         return nuvarandeSpelare;
     }
+
 }

@@ -16,6 +16,7 @@ public class Square extends JButton {
     }
 
 
+
     Square(PlayingField playingField, JLabel stateText) {
         this.playingField = playingField;
         setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
@@ -74,6 +75,7 @@ public class Square extends JButton {
         marker = ' ';
         upptagen = false;
         setText(Character.toString(marker));
+        setEnabled(true);
     }
 
 }
