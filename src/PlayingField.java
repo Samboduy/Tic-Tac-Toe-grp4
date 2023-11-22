@@ -30,6 +30,15 @@ public class PlayingField extends JPanel {
         Random rand = new Random();
         number=rand.nextInt(between) + 1;
     }
+
+    private int count = 0;
+    public void setCount(int newCount){
+        count=newCount;
+    }
+    public int getCount(){
+        return count;
+    }
+    Square square;
     PlayingField(Window window, JLabel stateText) {
         this.window = window;
         this.setLayout(new GridLayout(3, 3));
@@ -51,6 +60,7 @@ public class PlayingField extends JPanel {
     }
 
     public boolean checkWinner() {
+
         //Vinnande kombinationer - horisontella, vertikala och diagonala
         int[][] winningCombinations = {
                 {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, //Horisontella
@@ -59,9 +69,9 @@ public class PlayingField extends JPanel {
         };
 
         for (int[] combination : winningCombinations) {
-            int first = combination[0];
-            int second = combination[1];
-            int third = combination[2];
+            int first = combination[0]; //0,3,6 (horinsontellt), 0,1,2 (vertikalt), 0,2 (diagonalt)
+            int second = combination[1]; //1,4,7 (horinsontellt), 0,4,5 (vertikalt), 4,4 (diagonalt)
+            int third = combination[2]; //2,5,8 (horinsontellt), 6,7,8 (vertikalt), 8,6 (diagonalt)
 
             Square square1 = squares.get(first);
             Square square2 = squares.get(second);
@@ -71,8 +81,14 @@ public class PlayingField extends JPanel {
                     square2.getMarker() == square3.getMarker() &&
                     square1.getMarker() != ' ') {
                 //Tre markörer i rad hittade - vinnare
+                for (count = 0; count<9;){
+                    squares.get(count).setEnabled(false);
+                    setCount(count+1);
+                    System.out.println("count " + count);
+                }
                 return true;
             }
+
         }
 
         return false;
@@ -161,4 +177,5 @@ public class PlayingField extends JPanel {
     public char getNuvarandeSpelare() {
         return nuvarandeSpelare;
     }
+
 }
