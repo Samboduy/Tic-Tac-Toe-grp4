@@ -14,6 +14,8 @@ public class PlayingField extends JPanel {
 
     //Just nu är det så att den första spelaren alltid är 'X'
     static char nuvarandeSpelare;
+
+    static char startingPlayer;
     //Here we want to make a grid layout, and which from an array list of 9 instances of Square, adds all to a grid layout.
     private String stateText;
     public void setStateText(String newStateText){
@@ -144,12 +146,13 @@ public class PlayingField extends JPanel {
     }
 
     public void AIMove() {
-        if (nuvarandeSpelare != 'O') return; //For now, hard code so it only triggers with O, later it will compare with the random player char
-        List<Square> emptySquares = (List<Square>) squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
-        Collections.shuffle(emptySquares); //Shuffle array
+        if (nuvarandeSpelare != startingPlayer) {
+            List<Square> emptySquares = (List<Square>) squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
+            Collections.shuffle(emptySquares); //Shuffle array
 
-        Square randomSquare = emptySquares.get(0);
-        randomSquare.doClick();
+            Square randomSquare = emptySquares.get(0);
+            randomSquare.doClick();
+        };
 
     }
     //Kallas från window när reset klickas.
@@ -168,10 +171,11 @@ public class PlayingField extends JPanel {
         setNumber(2);
         if (getNumber()==1){
             nuvarandeSpelare='X';
-
+            startingPlayer = 'X';
         }
         else{
             nuvarandeSpelare='O';
+            startingPlayer = 'O';
         }
     }
     public char getNuvarandeSpelare() {
