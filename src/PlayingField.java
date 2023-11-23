@@ -83,7 +83,7 @@ public class PlayingField extends JPanel {
                     square2.getMarker() == square3.getMarker() &&
                     square1.getMarker() != ' ') {
                 //Tre markörer i rad hittade - vinnare
-                /*The foor loop goes through every button and changes so your unable to engage with it
+                /*The foor loop goes through every button and changes so that you're unable to engage with it
                 and changes so it's like someone have clicked on each one of the buttons*/
                 for (count = 0; count<9;){
                     squares.get(count).setEnabled(false);
