@@ -1,5 +1,10 @@
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
@@ -12,7 +17,8 @@ public class PlayingField extends JPanel {
     Window window;
     static char currentPlayer;
     static char startingPlayer;
-
+    private Clip clip;
+    private Clip victory;
     private String stateText;
     public void setStateText(String newStateText){
         this.stateText=newStateText;
@@ -52,6 +58,8 @@ public class PlayingField extends JPanel {
         randomPlayer();
         setStateText(String.valueOf(currentPlayer));
         stateText.setText("Player " + getStateText() + "'s turn");
+        loadVictorySound();
+        loadSound();
     }
 
     public boolean checkWinner() {
@@ -194,5 +202,42 @@ public class PlayingField extends JPanel {
     public char getCurrentPlayer() {
         return currentPlayer;
     }
+    private void loadSound() { // Creating a method to download the file, doing it in a try/catch so that the game does not crash
+        Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path+ "/src/Ball_Drops.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+    public void playSound() {
+        // if so that it only plays if victoryClip has something in it
+        if (clip != null) {
+            clip.setFramePosition(0); // So the audio always plays from the beggining
+            clip.start();
+        }
+    }
+    private void loadVictorySound() {
+        Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path+ "/src/Female_Crowd_Celebration.wav"));
+            victory = AudioSystem.getClip();
+            victory.open(audioInputStream);
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+    public void playVictorySound() {
+
+        if (victory != null) {
+            victory.setFramePosition(0);
+            victory.start();
+        }
+    }
+
 
 }

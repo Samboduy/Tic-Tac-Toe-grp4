@@ -9,7 +9,6 @@ import java.nio.file.Path;
 import java.util.Objects;
 
 public class Square extends JButton {
-    private Clip clip;
     private char marker = ' ';
     private boolean occupied;
     public void setOccupied(boolean newUpptagen){
@@ -33,7 +32,6 @@ public class Square extends JButton {
         this.playingField = playingField;
         setStateText(String.valueOf(playingField.getCurrentPlayer()));
         setOccupied(false);
-        loadSound();
         setContentAreaFilled(false);
         setFont(new Font("Arial", Font.PLAIN, 40));
         setVisible(true);
@@ -44,11 +42,12 @@ public class Square extends JButton {
 
                 setOccupied(true);
                 setForeground(Color.BLACK); //Override hover
-                playSound();
+                playingField.playSound();
 
                 setText(Character.toString(marker));
                 boolean won = playingField.checkWinner();
                 if (!won) playingField.checkTie();
+                if (won) playingField.playVictorySound();
 
 
                 playingField.switchPlayer();
@@ -104,24 +103,6 @@ public class Square extends JButton {
         setOccupied(false);
         setText(Character.toString(marker));
         setEnabled(true);
-    }
-    private void loadSound() { // Creating a method to download the file, doing it in a try/catch so that the game does not crash
-        Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path+ "/src/Ball_Drops.wav"));
-            clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
-        }
-    }
-    private void playSound() {
-        // if so that it only plays if victoryClip has something in it
-        if (clip != null) {
-            clip.setFramePosition(0); // So the audio always plays from the beggining
-            clip.start();
-        }
     }
 
 }
