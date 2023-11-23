@@ -78,12 +78,7 @@ public class PlayingField extends JPanel {
                     square2.getMarker() == square3.getMarker() &&
                     square1.getMarker() != ' ') {
 
-                for (count = 0; count<9;){
-                    squares.get(count).setEnabled(false);
-                    squares.get(count).setOccupied(true);
-                    setCount(count+1);
-                }
-
+                gameOver();
                 //a popup that tells who won the game
                 if (window.againstAI) {
                     //We are playing against the AI
@@ -115,6 +110,14 @@ public class PlayingField extends JPanel {
 
         return false;
     }
+    //Disables buttons and makes it so the hover effect disappears by turning occupied to true
+    public void gameOver(){
+        for (count = 0; count<9;){
+            squares.get(count).setEnabled(false);
+            squares.get(count).setOccupied(true);
+            setCount(count+1);
+        }
+    }
 
     public boolean checkTie() {
         int filledTiles = 0;
@@ -127,6 +130,7 @@ public class PlayingField extends JPanel {
         if (isTie) {
             JOptionPane.showMessageDialog(null, "It's a tie!",
                     "Tie", JOptionPane.PLAIN_MESSAGE);
+                    gameOver();
         }
         return isTie;
     }
