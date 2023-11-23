@@ -19,6 +19,8 @@ public class PlayingField extends JPanel {
     static char startingPlayer;
     private Clip clip;
     private Clip victory;
+
+    private Clip tieSound;
     private String stateText;
     public void setStateText(String newStateText){
         this.stateText=newStateText;
@@ -59,6 +61,7 @@ public class PlayingField extends JPanel {
         setStateText(String.valueOf(currentPlayer));
         stateText.setText("Player " + getStateText() + "'s turn");
         loadVictorySound();
+        loadTieSound();
         loadSound();
     }
 
@@ -137,6 +140,7 @@ public class PlayingField extends JPanel {
         }
         boolean isTie = filledTiles == squares.size();
         if (isTie) {
+            playTieSound();
             JOptionPane.showMessageDialog(null, "It's a tie!",
                     "Tie", JOptionPane.PLAIN_MESSAGE);
                     gameOver();
@@ -232,11 +236,30 @@ public class PlayingField extends JPanel {
             e.printStackTrace();
         }
     }
+
+    private void loadTieSound() {
+        Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path+ "/src/tie.wav"));
+            tieSound = AudioSystem.getClip();
+            tieSound.open(audioInputStream);
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
     public void playVictorySound() {
 
         if (victory != null) {
             victory.setFramePosition(0);
             victory.start();
+        }
+    }
+    public void playTieSound() {
+
+        if (tieSound != null) {
+            tieSound.setFramePosition(0);
+            tieSound.start();
         }
     }
 
