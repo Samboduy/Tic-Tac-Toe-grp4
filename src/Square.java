@@ -1,16 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 
 public class Square extends JButton {
     private char marker = ' ';
-    private boolean upptagen;
-    public void setUpptagen(boolean newUpptagen){
-        upptagen=newUpptagen;
+    private boolean occupied;
+    public void setOccupied(boolean newUpptagen){
+        occupied =newUpptagen;
     }
-    public boolean getUpptagen(){
-        return upptagen;
+    public boolean getOccupied(){
+        return occupied;
     }
     private PlayingField playingField;
     private String stateText;
@@ -25,16 +24,16 @@ public class Square extends JButton {
 
     Square(PlayingField playingField, JLabel stateText) {
         this.playingField = playingField;
-        setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
+        setStateText(String.valueOf(playingField.getCurrentPlayer()));
 
-        setUpptagen(false);
+        setOccupied(false);
         setFont(new Font("Arial", Font.PLAIN, 40));
         addActionListener(e ->
         {
-            if (!getUpptagen()){
-                marker = playingField.getNuvarandeSpelare();
+            if (!getOccupied()){
+                marker = playingField.getCurrentPlayer();
 
-                setUpptagen(true);
+                setOccupied(true);
                 setForeground(Color.BLACK); //Override hover
 
                 if (playingField.checkWinner()) {
@@ -43,8 +42,8 @@ public class Square extends JButton {
                 }
 
                 setText(Character.toString(marker));
-                playingField.bytaSpelare();
-                setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
+                playingField.switchPlayer();
+                setStateText(String.valueOf(playingField.getCurrentPlayer()));
                 stateText.setText("Player " + getStateText() + "'s turn");
                 //Checka efter vinnare efter varje drag
 
@@ -53,8 +52,8 @@ public class Square extends JButton {
         addMouseListener(new MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 //setBackground(Color.GREEN);
-                char marker = playingField.getNuvarandeSpelare();
-                if (!getUpptagen()) {
+                char marker = playingField.getCurrentPlayer();
+                if (!getOccupied()) {
                     setText(Character.toString(marker));
                     setForeground(new Color(0,0,0,20));
                 }
@@ -63,7 +62,7 @@ public class Square extends JButton {
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 //setBackground(UIManager.getColor("control"));
-                if (!getUpptagen()) {
+                if (!getOccupied()) {
                     setText("");
                     setForeground(Color.BLACK);
                 }
@@ -77,9 +76,9 @@ public class Square extends JButton {
     }
 
     //Anropas från PlayingField. Rensar variabler och texten i square.
-    public void rensa () {
+    public void empty() {
         marker = ' ';
-        setUpptagen(false);
+        setOccupied(false);
         setText(Character.toString(marker));
         setEnabled(true);
     }

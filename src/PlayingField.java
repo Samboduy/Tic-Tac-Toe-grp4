@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -10,7 +9,7 @@ import java.util.stream.Collectors;
 public class PlayingField extends JPanel {
     ArrayList<Square> squares = new ArrayList<Square>();
     Window window;
-    static char nuvarandeSpelare;
+    static char currentPlayer;
     static char startingPlayer;
 
     private String stateText;
@@ -50,7 +49,7 @@ public class PlayingField extends JPanel {
             this.add(square);
         }
         randomPlayer();
-        setStateText(String.valueOf(nuvarandeSpelare));
+        setStateText(String.valueOf(currentPlayer));
         stateText.setText("Player " + getStateText() + "'s turn");
     }
 
@@ -80,10 +79,10 @@ public class PlayingField extends JPanel {
 
                 for (count = 0; count<9;){
                     squares.get(count).setEnabled(false);
-                    squares.get(count).setUpptagen(true);
+                    squares.get(count).setOccupied(true);
                     setCount(count+1);
                 }
-                if (nuvarandeSpelare=='O'){
+                if (currentPlayer =='O'){
                     JOptionPane.showMessageDialog(null,"Player O won the game",
                             "Victory",JOptionPane.PLAIN_MESSAGE);
                 }
@@ -101,11 +100,11 @@ public class PlayingField extends JPanel {
     }
 
     //Chooses who´s to start
-    public void bytaSpelare(){
-        if (nuvarandeSpelare == 'X'){
-            nuvarandeSpelare = 'O';
+    public void switchPlayer(){
+        if (currentPlayer == 'X'){
+            currentPlayer = 'O';
         } else {
-            nuvarandeSpelare = 'X';
+            currentPlayer = 'X';
         }
 
         if (window.againstAI) {
@@ -116,7 +115,7 @@ public class PlayingField extends JPanel {
 
 
     public void AIMove() {
-        if (nuvarandeSpelare != startingPlayer) {
+        if (currentPlayer != startingPlayer) {
             List<Square> emptySquares = (List<Square>) squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
             Collections.shuffle(emptySquares); //Shuffle array
 
@@ -129,10 +128,10 @@ public class PlayingField extends JPanel {
     //kallas på rensa funktionen som finns i klassen Square
     public void reset(JLabel status) {
         for (Square square : squares) {
-            square.rensa();
+            square.empty();
         }
         randomPlayer();
-        setStateText(String.valueOf(nuvarandeSpelare));
+        setStateText(String.valueOf(currentPlayer));
         status.setText("Player " + getStateText() + "'s turn");
     }
 
@@ -140,17 +139,17 @@ public class PlayingField extends JPanel {
         //takes a number that will be randomized between, the player to begin is then decided if it's one or two
         setNumber(2);
         if (getNumber()==1){
-            nuvarandeSpelare='X';
+            currentPlayer ='X';
             startingPlayer = 'X';
         }
         else{
-            nuvarandeSpelare='O';
+            currentPlayer ='O';
             startingPlayer = 'O';
         }
     }
 
-    public char getNuvarandeSpelare() {
-        return nuvarandeSpelare;
+    public char getCurrentPlayer() {
+        return currentPlayer;
     }
 
 }
