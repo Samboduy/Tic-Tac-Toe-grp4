@@ -130,7 +130,9 @@ public class PlayingField extends JPanel {
 
     public void AIMove() {
         if (currentPlayer != startingPlayer) {
-            List<Square> emptySquares = (List<Square>) squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
+            List<Square> emptySquares = (List<Square>)
+                    squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
+
             Collections.shuffle(emptySquares); //Shuffle array
             if(emptySquares.size() > 0) {
                 Square randomSquare = emptySquares.get(0);
@@ -152,7 +154,8 @@ public class PlayingField extends JPanel {
     }
 
     public void randomPlayer(){
-        //takes a number that will be randomized between, the player to begin is then decided if it's one or two
+        //setNumber randomizes a number between 1 and 2,
+        // then that nummber is used to decide which player will start
         setNumber(2);
         if (getNumber()==1){
             currentPlayer ='X';
