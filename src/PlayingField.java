@@ -1,5 +1,8 @@
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
@@ -91,10 +94,12 @@ public class PlayingField extends JPanel {
                 if (nuvarandeSpelare=='O'){
                     JOptionPane.showMessageDialog(null,"Player O won the game",
                             "Victory",JOptionPane.PLAIN_MESSAGE);
+                    // Ljud här för vinst
                 }
                 else {
                     JOptionPane.showMessageDialog(null,"Player X won the game",
                             "Victory",JOptionPane.PLAIN_MESSAGE);
+                    // Ljud här för vinst
                 }
 
                 return true;
@@ -104,6 +109,8 @@ public class PlayingField extends JPanel {
 
         return false;
     }
+
+
 
 
 
@@ -154,6 +161,7 @@ public class PlayingField extends JPanel {
         }
     }
 
+
     public void AIMove() {
         if (nuvarandeSpelare != startingPlayer) {
             List<Square> emptySquares = (List<Square>) squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
@@ -190,5 +198,7 @@ public class PlayingField extends JPanel {
     public char getNuvarandeSpelare() {
         return nuvarandeSpelare;
     }
+
+
 
 }

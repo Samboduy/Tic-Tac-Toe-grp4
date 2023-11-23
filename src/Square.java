@@ -1,9 +1,14 @@
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
+import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 
 public class Square extends JButton {
+    private Clip clip;
     private char marker = ' ';
     private boolean upptagen;
     public void setUpptagen(boolean newUpptagen){
@@ -27,6 +32,8 @@ public class Square extends JButton {
         this.playingField = playingField;
         setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
 
+        loadSound();
+
         upptagen = false;
         setFont(new Font("Arial", Font.PLAIN, 40));
         addActionListener(e ->
@@ -36,6 +43,8 @@ public class Square extends JButton {
 
                 upptagen = true;
                 setForeground(Color.BLACK); //Override hover
+
+                playSound();
 
                 if (playingField.checkWinner()) {
                     //Visa vinnarmeddelande
@@ -82,6 +91,22 @@ public class Square extends JButton {
         upptagen = false;
         setText(Character.toString(marker));
         setEnabled(true);
+    }
+    private void loadSound() { // Creating a method to download the file, doing it in a try/catch so that the game does not crash
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:/Users/olive/OneDrive/Dokument/GitHub/Tic-Tac-Toe-grp4/src/Ball_Drops.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+    private void playSound() {
+        // if so that it only plays if victoryClip has something in it
+        if (clip != null) {
+            clip.setFramePosition(0); // So the audio always plays from the beggining
+            clip.start();
+        }
     }
 
 }
