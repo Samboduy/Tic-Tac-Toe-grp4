@@ -90,9 +90,11 @@ public class PlayingField extends JPanel {
                     square1.getMarker() != ' ') {
 
                 gameOver();
-                playVictorySound();
+
                 //a popup that tells who won the game
                 if (window.againstAI) {
+                    loadMasterWinSound();
+                    playMasterWinSound();
                     //We are playing against the AI
                     if (currentPlayer==startingPlayer){
                         JOptionPane.showMessageDialog(null,"Congratulations! You won!",
@@ -103,6 +105,8 @@ public class PlayingField extends JPanel {
                                 "Lost",JOptionPane.PLAIN_MESSAGE);
                     }
                 } else {
+                    loadVictorySound();
+                    playVictorySound();
                     //Player vs player
                     if (currentPlayer == 'O') {
                         JOptionPane.showMessageDialog(null, "Player O won the game",
@@ -276,6 +280,26 @@ public class PlayingField extends JPanel {
     }
 
     public void playStartOverSound() {
+
+        if (clip!= null) {
+            clip.setFramePosition(0); // So the audio always plays from the beggining
+            clip.start();
+        }
+    }
+
+    public void loadMasterWinSound() {
+        Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path+ "/src/Master.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playMasterWinSound() {
 
         if (clip!= null) {
             clip.setFramePosition(0); // So the audio always plays from the beggining
