@@ -72,6 +72,7 @@ public class Square extends JButton {
                 if (!getOccupied()) {
                     setText("");
                     setForeground(Color.BLACK);
+                    playSound();
                 }
             }
         });
