@@ -87,6 +87,7 @@ public class PlayingField extends JPanel {
                     square1.getMarker() != ' ') {
 
                 gameOver();
+                playVictorySound();
                 //a popup that tells who won the game
                 if (window.againstAI) {
                     //We are playing against the AI

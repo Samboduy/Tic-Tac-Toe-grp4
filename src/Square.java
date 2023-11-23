@@ -47,7 +47,7 @@ public class Square extends JButton {
                 setText(Character.toString(marker));
                 boolean won = playingField.checkWinner();
                 if (!won) playingField.checkTie();
-                if (won) playingField.playVictorySound();
+
 
 
                 playingField.switchPlayer();
