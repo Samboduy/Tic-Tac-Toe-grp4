@@ -83,6 +83,7 @@ public class PlayingField extends JPanel {
                     squares.get(count).setOccupied(true);
                     setCount(count+1);
                 }
+
                 //a popup that tells who won the game
                 if (window.againstAI) {
                     //We are playing against the AI
@@ -110,7 +111,24 @@ public class PlayingField extends JPanel {
 
         }
 
+
+
         return false;
+    }
+
+    public boolean checkTie() {
+        int filledTiles = 0;
+        for (Square square : squares) {
+            if (square.getOccupied()) {
+                filledTiles++;
+            }
+        }
+        boolean isTie = filledTiles == squares.size();
+        if (isTie) {
+            JOptionPane.showMessageDialog(null, "It's a tie!",
+                    "Tie", JOptionPane.PLAIN_MESSAGE);
+        }
+        return isTie;
     }
 
     //Chooses who´s to start

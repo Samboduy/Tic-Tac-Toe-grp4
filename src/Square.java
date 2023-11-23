@@ -37,17 +37,14 @@ public class Square extends JButton {
                 setOccupied(true);
                 setForeground(Color.BLACK); //Override hover
 
-                if (playingField.checkWinner()) {
-                    //Visa vinnarmeddelande
-                    System.out.println("Player " + marker + " wins!");
-                }
-
                 setText(Character.toString(marker));
+                boolean won = playingField.checkWinner();
+                if (!won) playingField.checkTie();
+
+
                 playingField.switchPlayer();
                 setStateText(String.valueOf(playingField.getCurrentPlayer()));
                 stateText.setText("Player " + getStateText() + "'s turn");
-                //Checka efter vinnare efter varje drag
-
             }
         });
         addMouseListener(new MouseAdapter() {
