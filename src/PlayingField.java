@@ -83,17 +83,20 @@ public class PlayingField extends JPanel {
                     square2.getMarker() == square3.getMarker() &&
                     square1.getMarker() != ' ') {
                 //Tre markörer i rad hittade - vinnare
+                /*The foor loop goes through every button and changes so your unable to engage with it
+                and changes so it's like someone have clicked on each one of the buttons*/
                 for (count = 0; count<9;){
                     squares.get(count).setEnabled(false);
                     squares.get(count).setUpptagen(true);
                     setCount(count+1);
                 }
+                //a popup that tells who won the game
                 if (nuvarandeSpelare=='O'){
-                    JOptionPane.showMessageDialog(null,"Player O won the game",
+                    JOptionPane.showMessageDialog(null,"Congratulations! Player O won the game!",
                             "Victory",JOptionPane.PLAIN_MESSAGE);
                 }
                 else {
-                    JOptionPane.showMessageDialog(null,"Player X won the game",
+                    JOptionPane.showMessageDialog(null,"Congratulations! Player X won the game!",
                             "Victory",JOptionPane.PLAIN_MESSAGE);
                 }
 
