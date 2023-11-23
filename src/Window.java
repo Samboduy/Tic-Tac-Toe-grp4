@@ -42,12 +42,12 @@ public class Window extends JFrame {
         JPanel bottomPanel = new JPanel();
         add(bottomPanel, BorderLayout.SOUTH);
 
-        restart = new JButton("Starta om");
+        restart = new JButton("Restart");
         //adds an action listener to the restart button that calls on the restartPressed method
         restart.addActionListener(e -> restartPressed());
         bottomPanel.add(restart);
 
-        restartVsAI = new JButton("Starta om (mot AI)");
+        restartVsAI = new JButton("Restart (vs AI)");
         //adds an action listener to the restart button that calls on the restartPressed method
         restartVsAI.addActionListener(e -> restartWithAIPressed());
         bottomPanel.add(restartVsAI);

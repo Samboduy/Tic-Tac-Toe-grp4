@@ -91,14 +91,28 @@ public class PlayingField extends JPanel {
                     setCount(count+1);
                 }
                 //a popup that tells who won the game
-                if (nuvarandeSpelare=='O'){
-                    JOptionPane.showMessageDialog(null,"Congratulations! Player O won the game!",
-                            "Victory",JOptionPane.PLAIN_MESSAGE);
+                if (window.againstAI) {
+                    //We are playing against the AI
+                    if (nuvarandeSpelare==startingPlayer){
+                        JOptionPane.showMessageDialog(null,"Congratulations! You won!",
+                                "Victory",JOptionPane.PLAIN_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null,"Oh no! The AI won!",
+                                "Lost",JOptionPane.PLAIN_MESSAGE);
+                    }
+                } else {
+                    //Player vs player
+                    if (nuvarandeSpelare=='O'){
+                        JOptionPane.showMessageDialog(null,"Congratulations! Player O won the game!",
+                                "Victory",JOptionPane.PLAIN_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null,"Congratulations! Player X won the game!",
+                                "Victory",JOptionPane.PLAIN_MESSAGE);
+                    }
                 }
-                else {
-                    JOptionPane.showMessageDialog(null,"Congratulations! Player X won the game!",
-                            "Victory",JOptionPane.PLAIN_MESSAGE);
-                }
+
 
                 return true;
             }
@@ -161,9 +175,11 @@ public class PlayingField extends JPanel {
         if (nuvarandeSpelare != startingPlayer) {
             List<Square> emptySquares = (List<Square>) squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
             Collections.shuffle(emptySquares); //Shuffle array
+            if(emptySquares.size() > 0) {
+                Square randomSquare = emptySquares.get(0);
+                randomSquare.doClick();
+            }
 
-            Square randomSquare = emptySquares.get(0);
-            randomSquare.doClick();
         };
 
     }
