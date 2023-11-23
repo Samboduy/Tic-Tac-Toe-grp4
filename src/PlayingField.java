@@ -58,7 +58,6 @@ public class PlayingField extends JPanel {
         randomPlayer();
         setStateText(String.valueOf(currentPlayer));
         stateText.setText("Player " + getStateText() + "'s turn");
-        loadStartOverSound();
         loadVictorySound();
         loadSound();
     }
@@ -204,7 +203,7 @@ public class PlayingField extends JPanel {
     public char getCurrentPlayer() {
         return currentPlayer;
     }
-    private void loadSound() { // Creating a method to download the file, doing it in a try/catch so that the game does not crash
+    public void loadSound() { // Creating a method to download the file, doing it in a try/catch so that the game does not crash
         Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path+ "/src/Ball_Drops.wav"));
