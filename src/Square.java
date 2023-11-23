@@ -68,6 +68,8 @@ public class Square extends JButton {
         });
     }
 
+    //Overrides the paint component in button, which is to make the
+    //color more consistent across platforms (white)
     @Override
     protected void paintComponent(Graphics g) {
         final Graphics2D g2 = (Graphics2D) g.create();

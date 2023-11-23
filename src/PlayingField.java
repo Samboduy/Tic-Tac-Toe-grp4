@@ -145,16 +145,18 @@ public class PlayingField extends JPanel {
         }
     }
 
-
+    //Triggered each time a move is made and the game mode is set to AI.
+    //When triggered it checks if it's the player or AI's turn
     public void AIMove() {
         if (currentPlayer != startingPlayer) {
+            //Filter empty squares to be only the empty tiles, so that we have a list of spots to pick from
             List<Square> emptySquares = (List<Square>)
                     squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
 
-            Collections.shuffle(emptySquares); //Shuffle array
-            if(emptySquares.size() > 0) {
-                Square randomSquare = emptySquares.get(0);
-                randomSquare.doClick();
+            Collections.shuffle(emptySquares); //Shuffle array, basically randomizes the list
+            if(emptySquares.size() > 0) { //To prevent crashes, check so there are more than 0 spots
+                Square randomSquare = emptySquares.get(0); //get first in array
+                randomSquare.doClick(); //Fake a click
             }
 
         };
