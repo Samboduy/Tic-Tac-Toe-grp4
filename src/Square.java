@@ -12,7 +12,7 @@ public class Square extends JButton {
     public boolean getUpptagen(){
         return upptagen;
     }
-    private PlayingField playingField;
+     PlayingField playingField;
     private String stateText;
     public void setStateText(String newStateText){
         this.stateText=newStateText;
