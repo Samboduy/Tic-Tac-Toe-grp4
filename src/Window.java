@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 public class Window extends JFrame {
     JButton restart;
-
     JButton restartVsAI;
     PlayingField playingField;
     JLabel status;
