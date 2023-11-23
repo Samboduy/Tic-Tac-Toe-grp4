@@ -135,7 +135,8 @@ public class PlayingField extends JPanel {
         return isTie;
     }
 
-    //Chooses who´s to start
+    //swithPlayer is called on everytime the user puts down an X or an O
+    //if the current player is X when putting down his marker then it will switch to O afterward
     public void switchPlayer(){
         if (currentPlayer == 'X'){
             currentPlayer = 'O';
@@ -176,10 +177,9 @@ public class PlayingField extends JPanel {
         setStateText(String.valueOf(currentPlayer));
         status.setText("Player " + getStateText() + "'s turn");
     }
-
+    //setNumber randomizes a number between 1 and 2,
+    // then that nummber is used to decide which player will start
     public void randomPlayer(){
-        //setNumber randomizes a number between 1 and 2,
-        // then that nummber is used to decide which player will start
         setNumber(2);
         if (getNumber()==1){
             currentPlayer ='X';
