@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.Objects;
 
 public class Square extends JButton {
@@ -42,6 +44,7 @@ public class Square extends JButton {
 
                 setOccupied(true);
                 setForeground(Color.BLACK); //Override hover
+                playSound();
 
                 setText(Character.toString(marker));
                 boolean won = playingField.checkWinner();
@@ -103,10 +106,12 @@ public class Square extends JButton {
         setEnabled(true);
     }
     private void loadSound() { // Creating a method to download the file, doing it in a try/catch so that the game does not crash
+        Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:/Users/olive/OneDrive/Dokument/GitHub/Tic-Tac-Toe-grp4/src/Ball_Drops.wav"));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path+ "/src/Ball_Drops.wav"));
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
+
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
