@@ -69,6 +69,6 @@ public class Window extends JFrame {
         playingField.reset(status);
         playingField.loadStartOverSound();
         playingField.playStartOverSound();
-
+        playingField.loadSound();
     }
 }
