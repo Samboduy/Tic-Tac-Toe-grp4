@@ -46,7 +46,7 @@ public class Window extends JFrame {
         restart.addActionListener(e -> restartPressed());
         bottomPanel.add(restart);
 
-        restartVsAI = new JButton("Starta over (VS AI)");
+        restartVsAI = new JButton("Start over (VS AI)");
         //adds an action listener to the restart button that calls on the restartPressed method
         restartVsAI.addActionListener(e -> restartWithAIPressed());
         bottomPanel.add(restartVsAI);

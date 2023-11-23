@@ -86,7 +86,7 @@ public class PlayingField extends JPanel {
                 //a popup that tells who won the game
                 if (window.againstAI) {
                     //We are playing against the AI
-                    if (nuvarandeSpelare==startingPlayer){
+                    if (currentPlayer==startingPlayer){
                         JOptionPane.showMessageDialog(null,"Congratulations! You won!",
                                 "Victory",JOptionPane.PLAIN_MESSAGE);
                     }
@@ -96,7 +96,7 @@ public class PlayingField extends JPanel {
                     }
                 } else {
                     //Player vs player
-                    if (nuvarandeSpelare == 'O') {
+                    if (currentPlayer == 'O') {
                         JOptionPane.showMessageDialog(null, "Player O won the game",
                                 "Victory", JOptionPane.PLAIN_MESSAGE);
                     } else {
