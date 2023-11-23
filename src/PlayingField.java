@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -82,13 +83,26 @@ public class PlayingField extends JPanel {
                     squares.get(count).setOccupied(true);
                     setCount(count+1);
                 }
-                if (currentPlayer =='O'){
-                    JOptionPane.showMessageDialog(null,"Player O won the game",
-                            "Victory",JOptionPane.PLAIN_MESSAGE);
-                }
-                else {
-                    JOptionPane.showMessageDialog(null,"Player X won the game",
-                            "Victory",JOptionPane.PLAIN_MESSAGE);
+                //a popup that tells who won the game
+                if (window.againstAI) {
+                    //We are playing against the AI
+                    if (nuvarandeSpelare==startingPlayer){
+                        JOptionPane.showMessageDialog(null,"Congratulations! You won!",
+                                "Victory",JOptionPane.PLAIN_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null,"Oh no! The AI won!",
+                                "Lost",JOptionPane.PLAIN_MESSAGE);
+                    }
+                } else {
+                    //Player vs player
+                    if (nuvarandeSpelare == 'O') {
+                        JOptionPane.showMessageDialog(null, "Player O won the game",
+                                "Victory", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Player X won the game",
+                                "Victory", JOptionPane.PLAIN_MESSAGE);
+                    }
                 }
 
                 return true;
@@ -118,9 +132,11 @@ public class PlayingField extends JPanel {
         if (currentPlayer != startingPlayer) {
             List<Square> emptySquares = (List<Square>) squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
             Collections.shuffle(emptySquares); //Shuffle array
+            if(emptySquares.size() > 0) {
+                Square randomSquare = emptySquares.get(0);
+                randomSquare.doClick();
+            }
 
-            Square randomSquare = emptySquares.get(0);
-            randomSquare.doClick();
         };
     }
     //Kallas från window när reset klickas.
