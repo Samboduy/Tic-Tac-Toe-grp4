@@ -1,7 +1,6 @@
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.io.IOException;
@@ -10,14 +9,14 @@ import java.util.Objects;
 public class Square extends JButton {
     private Clip clip;
     private char marker = ' ';
-    private boolean upptagen;
-    public void setUpptagen(boolean newUpptagen){
-        upptagen=newUpptagen;
+    private boolean occupied;
+    public void setOccupied(boolean newUpptagen){
+        occupied =newUpptagen;
     }
-    public boolean getUpptagen(){
-        return upptagen;
+    public boolean getOccupied(){
+        return occupied;
     }
-    private PlayingField playingField;
+     PlayingField playingField;
     private String stateText;
     public void setStateText(String newStateText){
         this.stateText=newStateText;
@@ -30,40 +29,35 @@ public class Square extends JButton {
 
     Square(PlayingField playingField, JLabel stateText) {
         this.playingField = playingField;
-        setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
-
+        setStateText(String.valueOf(playingField.getCurrentPlayer()));
+        setOccupied(false);
         loadSound();
-
-        upptagen = false;
+        setContentAreaFilled(false);
         setFont(new Font("Arial", Font.PLAIN, 40));
+        setVisible(true);
         addActionListener(e ->
         {
-            if (!upptagen){
-                marker = playingField.getNuvarandeSpelare();
+            if (!getOccupied()){
+                marker = playingField.getCurrentPlayer();
 
-                upptagen = true;
+                setOccupied(true);
                 setForeground(Color.BLACK); //Override hover
 
-                playSound();
-
-                if (playingField.checkWinner()) {
-                    //Visa vinnarmeddelande
-                    System.out.println("Player " + marker + " wins!");
-                }
-
                 setText(Character.toString(marker));
-                playingField.bytaSpelare();
-                setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
-                stateText.setText("Player " + getStateText() + "'s turn");
-                //Checka efter vinnare efter varje drag
+                boolean won = playingField.checkWinner();
+                if (!won) playingField.checkTie();
 
+
+                playingField.switchPlayer();
+                setStateText(String.valueOf(playingField.getCurrentPlayer()));
+                stateText.setText("Player " + getStateText() + "'s turn");
             }
         });
         addMouseListener(new MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 //setBackground(Color.GREEN);
-                char marker = playingField.getNuvarandeSpelare();
-                if (!upptagen) {
+                char marker = playingField.getCurrentPlayer();
+                if (!getOccupied()) {
                     setText(Character.toString(marker));
                     setForeground(new Color(0,0,0,20));
                 }
@@ -72,12 +66,28 @@ public class Square extends JButton {
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 //setBackground(UIManager.getColor("control"));
-                if (!upptagen) {
+                if (!getOccupied()) {
                     setText("");
                     setForeground(Color.BLACK);
                 }
             }
         });
+    }
+
+    //Overrides the paint component in button, which is to make the
+    //color more consistent across platforms (white)
+    @Override
+    protected void paintComponent(Graphics g) {
+        final Graphics2D g2 = (Graphics2D) g.create();
+        g2.setPaint(new GradientPaint(
+                new Point(0, 0),
+                Color.WHITE,
+                new Point(0, getHeight()),
+                Color.WHITE));
+        g2.fillRect(0, 0, getWidth(), getHeight());
+        g2.dispose();
+
+        super.paintComponent(g);
     }
 
 
@@ -86,9 +96,9 @@ public class Square extends JButton {
     }
 
     //Anropas från PlayingField. Rensar variabler och texten i square.
-    public void rensa () {
+    public void empty() {
         marker = ' ';
-        upptagen = false;
+        setOccupied(false);
         setText(Character.toString(marker));
         setEnabled(true);
     }

@@ -1,21 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 import java.util.stream.Collectors;
 
 public class PlayingField extends JPanel {
     ArrayList<Square> squares = new ArrayList<Square>();
-
     Window window;
-
-    //Just nu är det så att den första spelaren alltid är 'X'
-    static char nuvarandeSpelare;
-
+    static char currentPlayer;
     static char startingPlayer;
-    //Here we want to make a grid layout, and which from an array list of 9 instances of Square, adds all to a grid layout.
+
     private String stateText;
     public void setStateText(String newStateText){
         this.stateText=newStateText;
@@ -23,6 +20,7 @@ public class PlayingField extends JPanel {
     public String getStateText(){
         return stateText;
     }
+
     private int number;
     public int getNumber(){
         return number;
@@ -36,10 +34,9 @@ public class PlayingField extends JPanel {
     public void setCount(int newCount){
         count=newCount;
     }
-    public int getCount(){
-        return count;
-    }
-    Square square;
+
+
+    //Creating the playingfield, giving it a gridlayout (3x3)
     PlayingField(Window window, JLabel stateText) {
         this.window = window;
         this.setLayout(new GridLayout(3, 3));
@@ -50,105 +47,100 @@ public class PlayingField extends JPanel {
         //Using the existing list of square instances, add square.
         for (int i = 0; i < squares.size(); i++) {
             Square square = squares.get(i);
-
             this.add(square);
-            System.out.println(i);
         }
-        //window.setVisible(true);
         randomPlayer();
-        setStateText(String.valueOf(nuvarandeSpelare));
+        setStateText(String.valueOf(currentPlayer));
         stateText.setText("Player " + getStateText() + "'s turn");
     }
 
     public boolean checkWinner() {
-
-        //Vinnande kombinationer - horisontella, vertikala och diagonala
+        //Winning combinations, horizontal, vertical, and diagonal
         int[][] winningCombinations = {
-                {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, //Horisontella
-                {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, //Vertikala
-                {0, 4, 8}, {2, 4, 6} //Diagonala
+                {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, //Horizontal possibilities of winning
+                {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, //Vertical possibilities of winning
+                {0, 4, 8}, {2, 4, 6} //Diagonal possibilities of winning
         };
 
+        //Goes through each number of choosen squares
         for (int[] combination : winningCombinations) {
-            int first = combination[0]; //0,3,6 (horinsontellt), 0,1,2 (vertikalt), 0,2 (diagonalt)
-            int second = combination[1]; //1,4,7 (horinsontellt), 0,4,5 (vertikalt), 4,4 (diagonalt)
-            int third = combination[2]; //2,5,8 (horinsontellt), 6,7,8 (vertikalt), 8,6 (diagonalt)
+            int first = combination[0]; //0,3,6 (Horizontal), 0,1,2 (vertical), 0,2 (diagonal)
+            int second = combination[1]; //1,4,7 (Horizontal), 0,4,5 (vertical), 4,4 (diagonal)
+            int third = combination[2]; //2,5,8 (Horizontal), 6,7,8 (vertical), 8,6 (diagonal)
 
+            //Fetching the three inputs (squares) choosen
             Square square1 = squares.get(first);
             Square square2 = squares.get(second);
             Square square3 = squares.get(third);
 
+            //searches if the three inputs matches any of the winning combinations
             if (square1.getMarker() == square2.getMarker() &&
                     square2.getMarker() == square3.getMarker() &&
                     square1.getMarker() != ' ') {
-                //Tre markörer i rad hittade - vinnare
-                for (count = 0; count<9;){
-                    squares.get(count).setEnabled(false);
-                    squares.get(count).setUpptagen(true);
-                    setCount(count+1);
-                }
-                if (nuvarandeSpelare=='O'){
-                    JOptionPane.showMessageDialog(null,"Player O won the game",
-                            "Victory",JOptionPane.PLAIN_MESSAGE);
-                    // Ljud här för vinst
-                }
-                else {
-                    JOptionPane.showMessageDialog(null,"Player X won the game",
-                            "Victory",JOptionPane.PLAIN_MESSAGE);
-                    // Ljud här för vinst
+
+                gameOver();
+                //a popup that tells who won the game
+                if (window.againstAI) {
+                    //We are playing against the AI
+                    if (currentPlayer==startingPlayer){
+                        JOptionPane.showMessageDialog(null,"Congratulations! You won!",
+                                "Victory",JOptionPane.PLAIN_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null,"Oh no! The AI won!",
+                                "Lost",JOptionPane.PLAIN_MESSAGE);
+                    }
+                } else {
+                    //Player vs player
+                    if (currentPlayer == 'O') {
+                        JOptionPane.showMessageDialog(null, "Player O won the game",
+                                "Victory", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Player X won the game",
+                                "Victory", JOptionPane.PLAIN_MESSAGE);
+                    }
                 }
 
                 return true;
             }
 
         }
+
+
 
         return false;
     }
+    //Disables buttons and makes it so the hover effect disappears by turning occupied to true
+    public void gameOver(){
+        for (count = 0; count<9;){
+            squares.get(count).setEnabled(false);
+            squares.get(count).setOccupied(true);
+            setCount(count+1);
+        }
+    }
 
-
-
-
-
-   /* public boolean checkWinner (){
-        char [][] board = new char[3][3];
-        int index = 0;
-
-        for (int i = 0; i < 3; i++){
-            for (int x = 0; x < 3; x++){
-                board[i][x] = squares.get(index++).getMarker();
+    public boolean checkTie() {
+        int filledTiles = 0;
+        for (Square square : squares) {
+            if (square.getOccupied()) {
+                filledTiles++;
             }
         }
-
-        for (int i = 0; i < 3; i++) {
-
-            //Vinnare i rad i
-            if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ') {
-                return true;
-            }
-            //Vinnare i kolumn i
-            if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != ' ') {
-                return true;
-            }
+        boolean isTie = filledTiles == squares.size();
+        if (isTie) {
+            JOptionPane.showMessageDialog(null, "It's a tie!",
+                    "Tie", JOptionPane.PLAIN_MESSAGE);
+                    gameOver();
         }
-        //Kontrollera diagonaler för en vinnare
-        if ((board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != ' ')
-                || (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != ' ')) {
-            return true; // Vinnare i diagonal
-        }
+        return isTie;
+    }
 
-        return false; // Inga vinnare hittades
-    } */
-
-
-
-
-    //En if-sats för att avgöra vem ska sin lägga sin marker, kallas på när man trycker på knappen
-    public void bytaSpelare(){
-        if (nuvarandeSpelare == 'X'){
-            nuvarandeSpelare = 'O';
+    //Chooses who´s to start
+    public void switchPlayer(){
+        if (currentPlayer == 'X'){
+            currentPlayer = 'O';
         } else {
-            nuvarandeSpelare = 'X';
+            currentPlayer = 'X';
         }
 
         if (window.againstAI) {
@@ -157,44 +149,50 @@ public class PlayingField extends JPanel {
         }
     }
 
-
+    //Triggered each time a move is made and the game mode is set to AI.
+    //When triggered it checks if it's the player or AI's turn
     public void AIMove() {
-        if (nuvarandeSpelare != startingPlayer) {
-            List<Square> emptySquares = (List<Square>) squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
-            Collections.shuffle(emptySquares); //Shuffle array
+        if (currentPlayer != startingPlayer) {
+            //Filter empty squares to be only the empty tiles, so that we have a list of spots to pick from
+            List<Square> emptySquares = (List<Square>)
+                    squares.stream().filter(square -> square.getMarker() == ' ').collect(Collectors.toList());
 
-            Square randomSquare = emptySquares.get(0);
-            randomSquare.doClick();
+            Collections.shuffle(emptySquares); //Shuffle array, basically randomizes the list
+            if(emptySquares.size() > 0) { //To prevent crashes, check so there are more than 0 spots
+                Square randomSquare = emptySquares.get(0); //get first in array
+                randomSquare.doClick(); //Fake a click
+            }
+
         };
-
     }
     //Kallas från window när reset klickas.
     //Gör en loop över en arrayen med squares, och
     //kallas på rensa funktionen som finns i klassen Square
     public void reset(JLabel status) {
         for (Square square : squares) {
-            square.rensa();
+            square.empty();
         }
         randomPlayer();
-        setStateText(String.valueOf(nuvarandeSpelare));
+        setStateText(String.valueOf(currentPlayer));
         status.setText("Player " + getStateText() + "'s turn");
     }
+
     public void randomPlayer(){
-        //takes a number that will be randomized between, the player to begin is then decided if it's one or two
+        //setNumber randomizes a number between 1 and 2,
+        // then that nummber is used to decide which player will start
         setNumber(2);
         if (getNumber()==1){
-            nuvarandeSpelare='X';
+            currentPlayer ='X';
             startingPlayer = 'X';
         }
         else{
-            nuvarandeSpelare='O';
+            currentPlayer ='O';
             startingPlayer = 'O';
         }
     }
-    public char getNuvarandeSpelare() {
-        return nuvarandeSpelare;
+
+    public char getCurrentPlayer() {
+        return currentPlayer;
     }
-
-
 
 }
