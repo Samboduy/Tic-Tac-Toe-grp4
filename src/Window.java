@@ -60,9 +60,13 @@ public class Window extends JFrame {
     public void restartPressed(){
         againstAI = false;
         playingField.reset(status);
+        playingField.loadStartOverSound();
+        playingField.playStartOverSound();
     }
     public void restartWithAIPressed(){
         againstAI = true;
         playingField.reset(status);
+        playingField.loadStartOverSound();
+        playingField.playStartOverSound();
     }
 }

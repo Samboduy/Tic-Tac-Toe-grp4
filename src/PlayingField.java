@@ -58,6 +58,7 @@ public class PlayingField extends JPanel {
         randomPlayer();
         setStateText(String.valueOf(currentPlayer));
         stateText.setText("Player " + getStateText() + "'s turn");
+        loadStartOverSound();
         loadVictorySound();
         loadSound();
     }
@@ -240,5 +241,24 @@ public class PlayingField extends JPanel {
         }
     }
 
+    public void loadStartOverSound() {
+        Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path+ "/src/Twang.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playStartOverSound() {
+
+        if (clip!= null) {
+            clip.setFramePosition(0); // So the audio always plays from the beggining
+            clip.start();
+        }
+    }
 
 }
