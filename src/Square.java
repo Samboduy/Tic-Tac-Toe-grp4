@@ -26,9 +26,10 @@ public class Square extends JButton {
     Square(PlayingField playingField, JLabel stateText) {
         this.playingField = playingField;
         setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
-
+        setContentAreaFilled(false);
         setUpptagen(false);
         setFont(new Font("Arial", Font.PLAIN, 40));
+        setVisible(true);
         addActionListener(e ->
         {
             if (!getUpptagen()){
@@ -69,6 +70,20 @@ public class Square extends JButton {
                 }
             }
         });
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        final Graphics2D g2 = (Graphics2D) g.create();
+        g2.setPaint(new GradientPaint(
+                new Point(0, 0),
+                Color.WHITE,
+                new Point(0, getHeight()),
+                Color.WHITE));
+        g2.fillRect(0, 0, getWidth(), getHeight());
+        g2.dispose();
+
+        super.paintComponent(g);
     }
 
 
