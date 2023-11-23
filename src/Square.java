@@ -27,14 +27,14 @@ public class Square extends JButton {
         this.playingField = playingField;
         setStateText(String.valueOf(playingField.getNuvarandeSpelare()));
 
-        upptagen = false;
+        setUpptagen(false);
         setFont(new Font("Arial", Font.PLAIN, 40));
         addActionListener(e ->
         {
-            if (!upptagen){
+            if (!getUpptagen()){
                 marker = playingField.getNuvarandeSpelare();
 
-                upptagen = true;
+                setUpptagen(true);
                 setForeground(Color.BLACK); //Override hover
 
                 if (playingField.checkWinner()) {
@@ -54,7 +54,7 @@ public class Square extends JButton {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 //setBackground(Color.GREEN);
                 char marker = playingField.getNuvarandeSpelare();
-                if (!upptagen) {
+                if (!getUpptagen()) {
                     setText(Character.toString(marker));
                     setForeground(new Color(0,0,0,20));
                 }
@@ -63,7 +63,7 @@ public class Square extends JButton {
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 //setBackground(UIManager.getColor("control"));
-                if (!upptagen) {
+                if (!getUpptagen()) {
                     setText("");
                     setForeground(Color.BLACK);
                 }
@@ -79,7 +79,7 @@ public class Square extends JButton {
     //Anropas från PlayingField. Rensar variabler och texten i square.
     public void rensa () {
         marker = ' ';
-        upptagen = false;
+        setUpptagen(false);
         setText(Character.toString(marker));
         setEnabled(true);
     }
