@@ -137,11 +137,11 @@ public class PlayingField extends JPanel {
 
     public boolean checkTie() {
         int filledTiles = 0;
-        for (Square square : squares) {
-            if (square.getOccupied()) {
+        for (Square square : squares)
+            if (square.getOccupied())
                 filledTiles++;
-            }
-        }
+
+
         boolean isTie = filledTiles == squares.size();
         if (isTie) {
             playTieSound();
