@@ -1,2 +1,2 @@
-#Tick Tac Toe
-###A simple tick tack toe game made with Java
+# Tick Tac Toe
+### A simple tick tack toe game made with Java
